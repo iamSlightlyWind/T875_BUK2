@@ -20,14 +20,14 @@ jobs:
       if: failure()
       uses: lhotari/action-upterm@v1
 
-    - name: Upload log
-      if: always()
-      run: |
-        cd dump
-        git pull
-        git add -A
-        git commit --allow-empty-message -m "Upload latest log"
-        git push
+#    - name: Upload log
+#      if: always()
+#      run: |
+#        cd dump
+#        git pull
+#        git add -A
+#        git commit --allow-empty-message -m "Upload latest log"
+#        git push
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
