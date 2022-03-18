@@ -7,3 +7,9 @@
 [submodule "dump"]
 	path = dump
 	url = https://github.com/iamSlightlyWind/dump
+#[submodule "toolchain/gcc"]
+#	path = toolchain/gcc
+#	url = /home/slightlywind/actions-runner/_work/T875BUK2/T875BUK2/toolchain/gcc/
+#[submodule "toolchain/clang"]
+#	path = toolchain/clang
+#	url = /home/slightlywind/actions-runner/_work/T875BUK2/T875BUK2/toolchain/clang
