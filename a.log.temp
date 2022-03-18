@@ -1,0 +1,34 @@
+WARNING: EXPORT symbol "gsi_write_channel_scratch" [vmlinux] version generation failed, symbol will not be versioned.
+WARNING: vmlinux.o(.text+0x246dcc): Section mismatch in reference from the function init_rbincache() to the function .init.text:rc_sysfs_init()
+The function init_rbincache() references
+the function __init rc_sysfs_init().
+This is often because init_rbincache lacks a __init 
+annotation or the annotation of rc_sysfs_init is wrong.
+
+  KSYM    .tmp_kallsyms1.o
+  KSYM    .tmp_kallsyms2.o
+  LD      vmlinux
+  SORTEX  vmlinux
+  SYSMAP  System.map
+  CFP : instrumenting vmlinux... 
+Traceback (most recent call last):
+  File "../scripts/cfp/instrument.py", line 1313, in <module>
+    main()
+  File "../scripts/cfp/instrument.py", line 1179, in main
+    with _load_objdump() as objdump:
+  File "../scripts/cfp/instrument.py", line 1176, in _load_objdump
+    return contextlib.closing(load_and_cache_objdump(args.vmlinux, config_file=args.config, inplace=args.inplace))
+  File "../scripts/cfp/instrument.py", line 1207, in load_and_cache_objdump
+    objdump.parse()
+  File "../scripts/cfp/instrument.py", line 363, in parse
+    self.sections = parse_sections(self.vmlinux)
+  File "../scripts/cfp/instrument.py", line 1081, in parse_sections
+    m = re.search(r'^Sections:', line)
+  File "/usr/lib/python3.8/re.py", line 201, in search
+    return _compile(pattern, flags).search(string)
+TypeError: cannot use a string pattern on a bytes-like object
+make[1]: *** [/home/runner/work/T875BUK2/T875BUK2/Makefile:1191: vmlinux] Error 1
+make[1]: Leaving directory '/home/runner/work/T875BUK2/T875BUK2/out'
+make: *** [Makefile:146: sub-make] Error 2
+make: Leaving directory '/home/runner/work/T875BUK2/T875BUK2'
+Error: Process completed with exit code 2.
