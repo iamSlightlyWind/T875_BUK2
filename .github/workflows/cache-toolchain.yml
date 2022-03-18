@@ -1,0 +1,25 @@
+name: "Cache toolchain"
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Workflow
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout kernel source
+      uses: actions/checkout@v2
+
+    - name: Restore cached toolchain
+      uses: actions/cache@v2.1.7
+      id: toolchain
+      with:
+        path: toolchain
+        key: toolchain
+
+    - name: Check cache-hit
+      if: steps.toolchain.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+      with:
+        submodules: true

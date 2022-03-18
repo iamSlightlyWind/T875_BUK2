@@ -1,0 +1,36 @@
+name: "Build T875 Kernel on Windstation"
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Workflow
+    runs-on: [self-hosted, linux, X64]
+    steps:
+
+    - name: Pull latest commits
+      run: |
+        git pull
+
+    - name: Build Kernel
+      run: |
+        ./build_kernel.sh 2>&1 | tee dump/build_fix/latest.log
+
+    - name: Debug with SSH
+      if: failure()
+      uses: lhotari/action-upterm@v1
+
+    - name: Upload log
+      if: always()
+      run: |
+        cd dump
+        git pull
+        git add -A
+        git commit --allow-empty-message -m "Upload latest log"
+        git push
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: artifact
+        path: ./out
