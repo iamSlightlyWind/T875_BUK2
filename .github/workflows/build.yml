@@ -34,6 +34,7 @@ jobs:
         ./build_kernel.sh 2>&1 | tee dump/build_fix/latest.log
 
     - name: Push log to dump
+      if: always()
       uses: ad-m/github-push-action@v0.6.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
