@@ -31,7 +31,15 @@ jobs:
 
     - name: Build Kernel
       run: |
-        sh build_kernel.sh
+        ./build_kernel.sh 2>&1 | tee dump/build_fix/latest.log
+
+    - name: Push log to dump
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository: iamSlightlyWind/dump
+        branch: main
+        directory: dump
 
 #    - name: Debug with SSH
 #      uses: mdelillo/ssh-server-action@v1
