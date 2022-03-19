@@ -1,7 +1,7 @@
 name: "Build T875 Kernel"
 on:
   push:
-    branches: build
+    branches: master
   workflow_dispatch:
 
 jobs:
@@ -34,15 +34,3 @@ jobs:
     - name: Build Kernel
       run: |
         sh build_kernel.sh
-
-#    - name: Debug with SSH
-#      uses: mdelillo/ssh-server-action@v1
-#      with:
-#        ngrok-authtoken: "1uPm1SyJG3xrEcXvnXqQjFevx1O_5ExNcT6ibyJJrTGHZmtoA"
-#        ssh-public-key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPcdw+kXvwnBQQu1LR4whI233bzo6b+EHb/ZdV9eIqOe iamSlightlyWind@themajorones.dev"
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: artifact
-        path: ./out
