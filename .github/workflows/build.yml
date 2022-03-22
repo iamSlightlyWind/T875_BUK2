@@ -1,7 +1,7 @@
 name: "Build T875 Kernel"
 on:
   push:
-    branches: direct-update
+    branches: direct_update
   workflow_dispatch:
 
 jobs:
