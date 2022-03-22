@@ -43,7 +43,7 @@ echo
 
 mkdir -p out
 mkdir -p release/modules/system/vendor/lib/modules
-mkdir zip
+mkdir upload
 
 BUILD_CROSS_COMPILE=$(pwd)/toolchain/gcc/bin/aarch64-linux-android-
 KERNEL_LLVM_BIN=$(pwd)/toolchain/clang/bin/clang
@@ -77,6 +77,6 @@ if [ -f out/arch/arm64/boot/Image ]; then
     
     cd release
     zip -r9 "Windstation-$HASH.zip" * -x *.DS_Store .git* README.md *placeholder LICENSE
-    mv Windstation* ../
+    mv Windstation* ../upload
     cd ../
 fi
