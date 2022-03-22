@@ -70,6 +70,7 @@ if [ -f out/arch/arm64/boot/Image ]; then
         cp -f out/arch/arm64/boot/Image.gz release/
     else
         cp -f out/arch/arm64/boot/Image release/
+        gzip Image
     fi
     find out -type f -name "*.ko" -exec cp -Rf "{}" release/modules/system/vendor/lib/modules/ \;
     
