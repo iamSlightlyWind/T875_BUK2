@@ -1,4 +1,4 @@
-name: "Build T875 Kernel"
+name: "Build latest commit"
 on:
   push:
     branches: direct_update
