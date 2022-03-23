@@ -10,32 +10,6 @@ echo "Clean Repository"
 echo
 
 make clean & make mrproper
-#git clean -xfd # failsafe
-
-find . -name "*.orig" -type f -delete
-
-if [ -d out ]; then
-    rm -rf out;
-fi
-
-if [ -f "release/dtb" ]; then
-    rm release/dtb;
-fi
-if [ -f "release/Image.gz" ]; then
-    rm release/Image.gz
-fi
-if [ -f "release/Image" ]; then
-    rm release/Image
-fi
-if compgen -G "release/modules/system/vendor/lib/modules/*.ko" > /dev/null; then
-    rm release/modules/system/vendor/lib/modules/*.ko;
-fi
-#find "release/modules/system/vendor/lib/modules" -name "*.ko" -type f -delete
-
-if compgen -G "release/*.zip" > /dev/null; then
-    rm release/*.zip;
-fi
-#find "release" -name "*.zip" -type f -delete
 
 echo
 echo "Compile Source"
@@ -64,20 +38,15 @@ echo
 echo "Package Kernel"
 echo
 
-if [ -f out/arch/arm64/boot/Image ]; then
-    cp -f out/arch/arm64/boot/dtb release/
-    if [ -f out/arch/arm64/boot/Image.gz ]; then
-        cp -f out/arch/arm64/boot/Image.gz release/
-    else
-        cp -f out/arch/arm64/boot/Image release/
-        gzip Image
-    fi
-    find out -type f -name "*.ko" -exec cp -Rf "{}" release/modules/system/vendor/lib/modules/ \;
-    
-    HASH=$(git rev-parse --short HEAD)
-    
-    cd release
-    zip -r9 "Windstation-$HASH.zip" * -x *.DS_Store .git* README.md *placeholder LICENSE
-    mv Windstation* ../upload
-    cd ../
-fi
+cp -f out/arch/arm64/boot/dtb release/
+cp -f out/arch/arm64/boot/Image release/
+
+find out -type f -name "*.ko" -exec cp -Rf "{}" release/modules/system/vendor/lib/modules/ \;
+
+HASH=$(git rev-parse --short HEAD)
+
+cd release
+gzip Image
+zip -r9 "Windstation-$HASH.zip" * -x *.DS_Store .git* README.md *placeholder LICENSE
+mv Windstation* ../upload
+cd ../
