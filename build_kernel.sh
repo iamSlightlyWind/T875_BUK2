@@ -50,4 +50,4 @@ tree release
 
 cd release
 gzip Image
-tree release
+tree
