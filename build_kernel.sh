@@ -47,6 +47,3 @@ HASH=$(git rev-parse --short HEAD)
 
 cd release
 gzip Image
-zip -r9 "Windstation-$HASH.zip" * -x *.DS_Store .git* README.md *placeholder LICENSE
-mv Windstation* ../upload
-cd ../
