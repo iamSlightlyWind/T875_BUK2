@@ -2,7 +2,7 @@
 rm -rf out
 
 rm -rf release
-gh clone iamSlightlyWind/AnyKernel3
+gh repo clone iamSlightlyWind/AnyKernel3
 mv AnyKernel3 release
 
 export ARCH=arm64
