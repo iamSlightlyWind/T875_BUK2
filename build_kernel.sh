@@ -1,7 +1,9 @@
 #!/bin/bash
 rm -rf out
 
-ccache -M 4.5
+rm -rf release
+gh clone iamSlightlyWind/AnyKernel3
+mv AnyKernel3 release
 
 export ARCH=arm64
 
