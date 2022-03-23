@@ -16,8 +16,6 @@ echo "Compile Source"
 echo
 
 mkdir -p out
-mkdir -p release/modules/system/vendor/lib/modules
-mkdir upload
 
 BUILD_CROSS_COMPILE=$(pwd)/toolchain/gcc/bin/aarch64-linux-android-
 KERNEL_LLVM_BIN=$(pwd)/toolchain/clang/bin/clang
@@ -29,21 +27,27 @@ make -j$(nproc) -C $(pwd) O=$(pwd)/out $KERNEL_MAKE_ENV ARCH=arm64 CROSS_COMPILE
 echo "Build kernel"
 make -j$(nproc) -C $(pwd) O=$(pwd)/out $KERNEL_MAKE_ENV ARCH=arm64 CROSS_COMPILE=$BUILD_CROSS_COMPILE REAL_CC=$KERNEL_LLVM_BIN CLANG_TRIPLE=$CLANG_TRIPLE CONFIG_DEBUG_SECTION_MISMATCH=y
 
-cat out/arch/arm64/boot/dts/vendor/qcom/kona-v2.1.dtb \
-    out/arch/arm64/boot/dts/vendor/qcom/kona-v2.dtb \
-    out/arch/arm64/boot/dts/vendor/qcom/kona.dtb \
-    > out/arch/arm64/boot/dtb
-
 echo
 echo "Package Kernel"
 echo
+rm -rf release/.git
+tree release
 
-cp -f out/arch/arm64/boot/dtb release/
+mkdir -p release/modules/system/vendor/lib/modules
+tree release
+
+cat out/arch/arm64/boot/dts/vendor/qcom/kona-v2.1.dtb \
+    out/arch/arm64/boot/dts/vendor/qcom/kona-v2.dtb \
+    out/arch/arm64/boot/dts/vendor/qcom/kona.dtb \
+    > release/dtb
+tree release
+
 cp -f out/arch/arm64/boot/Image release/
+tree release
 
 find out -type f -name "*.ko" -exec cp -Rf "{}" release/modules/system/vendor/lib/modules/ \;
-
-HASH=$(git rev-parse --short HEAD)
+tree release
 
 cd release
 gzip Image
+tree release
