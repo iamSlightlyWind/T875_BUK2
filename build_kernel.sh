@@ -33,22 +33,21 @@ echo
 echo "Package Kernel"
 echo
 rm -rf release/.git
-tree release
 
 mkdir -p release/modules/system/vendor/lib/modules
-tree release
+
+echo
+echo "Package kernel"
+echo
 
 cat out/arch/arm64/boot/dts/vendor/qcom/kona-v2.1.dtb \
     out/arch/arm64/boot/dts/vendor/qcom/kona-v2.dtb \
     out/arch/arm64/boot/dts/vendor/qcom/kona.dtb \
     > release/dtb
-tree release
 
 cp -f out/arch/arm64/boot/Image release/
-tree release
 
 find out -type f -name "*.ko" -exec cp -Rf "{}" release/modules/system/vendor/lib/modules/ \;
-tree release
 
 cd release
 gzip Image
