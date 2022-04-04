@@ -54,8 +54,3 @@ CFLAGS_blk-merge.o = -Wformat
 CFLAGS_elevator.o = -Wformat
 CFLAGS_cfq-iosched.o = -Wformat
 CFLAGS_genhd.o = -Wformat
-
-CFLAGS = -Wall -g
-
-%.o:%.c
-    gcc $(CFLAGS) $< -o $@
