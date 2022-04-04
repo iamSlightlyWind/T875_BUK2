@@ -12,12 +12,13 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v2
 
-    - name: Restore cached toolchain
-      uses: actions/cache@v2.1.7
-      id: toolchain
-      with:
-        path: toolchain
-        key: toolchain
+    #- name: Restore cached toolchain
+    #  uses: actions/cache@v2.1.7
+    #  id: toolchain
+    #  with:
+    #    path: toolchain
+    #    key: toolchain
+    # toolchain already cached, but I need to clone them again to add them as git modules
 
     - name: Get toolchain
       run: |
