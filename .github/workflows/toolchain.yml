@@ -1,7 +1,6 @@
-name: "Build T875 Kernel"
 on:
   push:
-    branches: AnyKernel
+    branches: '**'
   workflow_dispatch:
 
 jobs:
