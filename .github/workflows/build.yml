@@ -38,9 +38,6 @@ jobs:
     - name: Package Kernel
       run: |
         sh package_kernel.sh
-
-    - name: List target folder
-      run: tree out
         
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
