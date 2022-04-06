@@ -34,6 +34,9 @@ jobs:
     - name: Build Kernel
       run: |
         sh build_kernel.sh
+        
+    - name: List dtb
+      run: tree out/arch/arm64/boot/dts
 
     - name: Package Kernel
       run: |
